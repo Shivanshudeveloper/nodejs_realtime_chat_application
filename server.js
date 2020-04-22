@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 
+const router = express.Router()
+
 // http Module for socket.io
 const http = require('http');
 // Bring the SocketIO Path
@@ -24,6 +26,9 @@ const botName= 'CharCord Bot';
 
 // Set Static Folder in Public
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 
 // Run when client connects
 io.on('connection', socket => {
@@ -81,8 +86,11 @@ io.on('connection', socket => {
     // io.emit();
 });
 
+// Login Page
+app.get('/go', function(req, res){
+    res.sendFile(__dirname + '/public/index.html');
+});
 
-
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
